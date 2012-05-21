@@ -80,6 +80,7 @@ namespace Sourcecontroltester
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Brown);
+            //FUCK! OK!
 
             spriteBatch.Begin();
             spriteBatch.Draw(squareGuyTexture, squareGuyPos, Color.White);
