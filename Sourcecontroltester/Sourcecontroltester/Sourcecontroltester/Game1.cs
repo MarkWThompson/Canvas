@@ -82,6 +82,7 @@ namespace Sourcecontroltester
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Brown);
+            //FUCK! OK!
 
             // TODO: Add your drawing code here
 
