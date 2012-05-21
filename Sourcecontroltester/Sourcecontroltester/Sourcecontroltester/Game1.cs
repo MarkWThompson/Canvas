@@ -17,7 +17,9 @@ namespace Sourcecontroltester
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static SpriteBatch spriteBatch;
+        private Vector2 squareGuyPos = new Vector2(0, 0);
+        private Texture2D squareGuyTexture;
 
         public Game1()
         {
@@ -46,8 +48,7 @@ namespace Sourcecontroltester
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            squareGuyTexture = Content.Load<Texture2D>("SquareGuy");
         }
 
         /// <summary>
@@ -56,7 +57,6 @@ namespace Sourcecontroltester
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -70,8 +70,6 @@ namespace Sourcecontroltester
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -83,7 +81,9 @@ namespace Sourcecontroltester
         {
             GraphicsDevice.Clear(Color.Brown);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            spriteBatch.Draw(squareGuyTexture, squareGuyPos, Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
