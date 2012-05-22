@@ -1,3 +1,11 @@
+/*
+//
+// Authors: Elliot Morris, Mark Thompson.
+//
+// Details: Game class - most of the gameplay logic will reside here.
+//
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,26 +16,26 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-
+using Ebay.Objects;
 
 namespace Ebay
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
-        private Vector2 squareGuyPos = new Vector2(0, 0);
-        static private Texture2D squareGuyTexture;
+        Player wizard = new Player();
 
-        Sprite wizard = new Sprite();
-
-        public Game1()
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            // Sets screen size.
+            graphics.PreferredBackBufferWidth = Program.SCREEN_WIDTH;
+            graphics.PreferredBackBufferHeight = Program.SCREEN_HEIGHT;
         }
 
         /// <summary>
@@ -38,7 +46,6 @@ namespace Ebay
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             base.Initialize();
         }
 
@@ -50,9 +57,7 @@ namespace Ebay
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            squareGuyTexture = Content.Load<Texture2D>("Sprites/SquareGuy");
-            wizard.Initialise(squareGuyTexture, 0, 0, 1, 1);
-
+            wizard.Initialise(Content);
         }
 
         /// <summary>
@@ -73,6 +78,9 @@ namespace Ebay
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            wizard.Update();
+
             base.Update(gameTime);
         }
 
@@ -83,8 +91,7 @@ namespace Ebay
         /// 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DodgerBlue);
-            //Night Mark
+            GraphicsDevice.Clear(Color.DodgerBlue); // DodgerBlue is the new Brown which was the new Aquamarine which was the new Black overriding the original Green/Yellow coulour...
 
             spriteBatch.Begin();
             wizard.Draw(spriteBatch);

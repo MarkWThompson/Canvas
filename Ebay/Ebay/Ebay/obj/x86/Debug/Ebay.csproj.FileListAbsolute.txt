@@ -1,0 +1,7 @@
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Content\Sprites\SquareGuy.xnb
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Ebay.exe
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Ebay.pdb
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\obj\x86\Debug\Ebay.exe
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\obj\x86\Debug\Ebay.pdb
