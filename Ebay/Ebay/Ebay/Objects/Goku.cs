@@ -19,11 +19,12 @@ namespace Ebay.Objects
         //************************
         private int yVelocity;
         private int xVelocity;
-        private const int MAX_X_VELOCITY = 15;
-        private const int MAX_Y_VELOCITY = 15;
+        private const int MAX_X_VELOCITY = 12;
+        private const int MAX_Y_VELOCITY = 12;
         private const int ACCELERATION = 1;
         int counterto40 = 0;    //For hovering
         bool goingdown = true; //again, for hovering
+        int leftorright = 1;  //Left is 0, Right is 1
         KeyboardState keyboardState;
 
 
@@ -56,29 +57,57 @@ namespace Ebay.Objects
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 if (yVelocity > -MAX_Y_VELOCITY)
-                yVelocity -= ACCELERATION;
-                Spriterect.X = 315;
-                Spriterect.Y = 245;
-                Spriterect.Width = 55;
+                {
+                    yVelocity -= ACCELERATION;
+                    if (leftorright == 1)
+                    {
+                        Spriterect.X = 315;
+                        Spriterect.Y = 245;
+                        Spriterect.Width = 55;
+                        Spriterect.Height = 75;
+                    }
+                    else if (leftorright == 0)
+                    {
+                        Spriterect.X = 1060;
+                        Spriterect.Y = 245;
+                        Spriterect.Width = 55;
+                        Spriterect.Height = 75;
+                    }
+                }
             }
             if (keyboardState.IsKeyDown(Keys.Down))
             {
                 if (yVelocity < MAX_Y_VELOCITY)
-                yVelocity += ACCELERATION;
-                Spriterect.X = 315;
-                Spriterect.Y = 245;
-                Spriterect.Width = 55;
+                {
+                    yVelocity += ACCELERATION;
+                    if (leftorright == 1)
+                    {
+                        Spriterect.X = 315;
+                        Spriterect.Y = 245;
+                        Spriterect.Width = 55;
+                        Spriterect.Height = 75;
+                    }
+                    else if (leftorright == 0)
+                    {
+                        Spriterect.X = 1060;
+                        Spriterect.Y = 245;
+                        Spriterect.Width = 55;
+                        Spriterect.Height = 75;
+                    }
+                }
             }
             if (keyboardState.IsKeyDown(Keys.Left))
             {
+                leftorright = 0;
                 if (xVelocity > -MAX_X_VELOCITY)
                 xVelocity -= ACCELERATION;
-                Spriterect.X = 590;
+                Spriterect.X = 1110;
                 Spriterect.Y = 245;
                 Spriterect.Width = 75;
             }
             if (keyboardState.IsKeyDown(Keys.Right))
             {
+                leftorright = 1;
                 if (xVelocity < MAX_X_VELOCITY)
                 xVelocity += ACCELERATION;
                 Spriterect.X = 240;
@@ -93,10 +122,20 @@ namespace Ebay.Objects
                 {
                     if ((position.Y > (Program.SCREEN_HEIGHT - Spriterect.Height) - 2))  //Check if goku is on ground for standing sprite activation
                     {
-                        Spriterect.X = 15;
-                        Spriterect.Y = 75;
-                        Spriterect.Width = 55;
-                        Spriterect.Height = 75;
+                        if (leftorright == 1)
+                        {
+                            Spriterect.X = 15;
+                            Spriterect.Y = 75;
+                            Spriterect.Width = 55;
+                            Spriterect.Height = 75;
+                        }
+                        else if (leftorright == 0)
+                        {
+                            Spriterect.X = 1350;
+                            Spriterect.Y = 75;
+                            Spriterect.Width = 55;
+                            Spriterect.Height = 75;
+                        }
                     }
 
                     if (xVelocity != 0)
@@ -127,10 +166,22 @@ namespace Ebay.Objects
                 { //only trigger if still
                     if ((position.Y < (Program.SCREEN_HEIGHT - Spriterect.Height) - 1))//Check if goku is in the air for static flying animation
                     {
-                        Spriterect.X = 315;
-                        Spriterect.Y = 245;
-                        Spriterect.Width = 55;
+                        if (leftorright == 1)
+                        {
+                            Spriterect.X = 315;
+                            Spriterect.Y = 245;
+                            Spriterect.Width = 55;
+                            Spriterect.Height = 75;
+                        }
+                        else if (leftorright == 0)
+                        {
+                            Spriterect.X = 1060;
+                            Spriterect.Y = 245;
+                            Spriterect.Width = 55;
+                            Spriterect.Height = 75;
+                        }
                     }
+                        
                 }
             }
 
