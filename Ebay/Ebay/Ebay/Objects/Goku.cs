@@ -73,9 +73,9 @@ namespace Ebay.Objects
             {
                 if (xVelocity > -MAX_X_VELOCITY)
                 xVelocity -= ACCELERATION;
-                Spriterect.X = 180;
+                Spriterect.X = 590;
                 Spriterect.Y = 245;
-                Spriterect.Width = 55;
+                Spriterect.Width = 75;
             }
             if (keyboardState.IsKeyDown(Keys.Right))
             {
@@ -91,7 +91,7 @@ namespace Ebay.Objects
                 // Decays xVelocity if A/D are not being pressed.
                 if (keyboardState.IsKeyUp(Keys.Left) && keyboardState.IsKeyUp(Keys.Right))
                 {
-                    if ((position.Y > (Program.SCREEN_HEIGHT - Spriterect.Height) - 1))  //Check if goku is on ground for standing sprite activation
+                    if ((position.Y > (Program.SCREEN_HEIGHT - Spriterect.Height) - 2))  //Check if goku is on ground for standing sprite activation
                     {
                         Spriterect.X = 15;
                         Spriterect.Y = 75;
@@ -188,7 +188,7 @@ namespace Ebay.Objects
                         {
                             position.Y = position.Y - 0.25f;
                         }
-                        else if ((goingdown == true) && (counterto40 >= 30)) //if sprite is in upwards hover and is pretty much at the apex
+                        else if ((goingdown == false) && (counterto40 >= 30)) //if sprite is in upwards hover and is pretty much at the apex
                         {
                             position.Y = position.Y - 0.1f;
                         }
