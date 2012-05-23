@@ -23,7 +23,12 @@ namespace Ebay.Objects
         private const int MAX_Y_VELOCITY = 12;
         private const int ACCELERATION = 1;
         int counterto40 = 0;    //For hovering
+        int counterto15 = 0;    //for kamehameha frame updates
         bool goingdown = true; //again, for hovering
+        bool kamehameha = false;
+        int[] kamehamehaxpos = new int[4];
+        int[] kamehamehawidth = new int[4];
+        int framecounter = 0;
         int leftorright = 1;  //Left is 0, Right is 1
         KeyboardState keyboardState;
 
@@ -34,6 +39,11 @@ namespace Ebay.Objects
             Spriterect.Y = 75;
             Spriterect.Width = 55;
             Spriterect.Height = 75;
+            kamehamehaxpos[0] = 25;
+            kamehamehaxpos[1] = 92;
+            kamehamehaxpos[2] = 161;
+            kamehamehaxpos[3] = 222;
+            
         }
 
         public void Initialise(ContentManager content)
@@ -49,6 +59,7 @@ namespace Ebay.Objects
             HandleInput();
             UpdatePosition();
             MidairHover();
+            Kamehameha();
         }
 
         private void HandleInput()
@@ -185,6 +196,20 @@ namespace Ebay.Objects
                 }
             }
 
+            if (keyboardState.IsKeyDown(Keys.Space)) //For kamehameha attack
+            {
+                kamehameha = true;
+                Spriterect.Width = 55;
+                
+            }
+
+            else if (!keyboardState.IsKeyDown(Keys.Space))
+            {
+                framecounter = 0;
+                kamehameha = false;
+                counterto15 = 0;
+            }
+
 
             // Captures the state of the keyboard.
             keyboardState = Keyboard.GetState();
@@ -256,6 +281,40 @@ namespace Ebay.Objects
             }
         }
 
+
+        public void Kamehameha(){
+            if(kamehameha == true){
+
+                counterto15++;
+
+                if (counterto15 > 15)
+                { 
+                    counterto15 = 0;
+                }
+
+
+                if (counterto15 == 15)
+                {
+                    framecounter++;
+                }
+                if (framecounter <= 3) // Makes sure kamehamehaxpos dosent overflow
+                {
+                    Spriterect.X = kamehamehaxpos[framecounter];
+                    Spriterect.Width = 55;
+                }
+                else if (framecounter > 3)
+                {
+                    Spriterect.X = kamehamehaxpos[3];
+                    Spriterect.Width = 113;
+                }
+                if (framecounter > 2)
+                {
+                    Spriterect.Width = 113;
+                }
+                Spriterect.Y = 510;
+                Spriterect.Height = 75;  
+            }
+        }
 
     }
 }
