@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Ebay.Engine.Objects;
+using Ebay;
 
 namespace Ebay.Objects
 
@@ -21,17 +22,18 @@ namespace Ebay.Objects
         private int xVelocity;
         private const int MAX_X_VELOCITY = 12;
         private const int MAX_Y_VELOCITY = 12;
-        private const int ACCELERATION = 1;
+        private int ACCELERATION = 1;
         int counterto40 = 0;    //For hovering
         int counterto15 = 0;    //for kamehameha frame updates
         bool goingdown = true; //again, for hovering
         bool kamehameha = false;
-        int[] kamehamehaxpos = new int[4];
-        int[] kamehamehawidth = new int[4];
+        int[] kamehamehaxposright = new int[4];
+        int[] kamehamehaxposleft = new int[4];
         int framecounter = 0;
-        int leftorright = 1;  //Left is 0, Right is 1
+        public int leftorright = 1;  //Left is 0, Right is 1
         KeyboardState keyboardState;
-
+        public bool energyballactive = false;
+        bool hasreset = true;
 
         public Goku()
         {
@@ -39,10 +41,14 @@ namespace Ebay.Objects
             Spriterect.Y = 75;
             Spriterect.Width = 55;
             Spriterect.Height = 75;
-            kamehamehaxpos[0] = 25;
-            kamehamehaxpos[1] = 92;
-            kamehamehaxpos[2] = 161;
-            kamehamehaxpos[3] = 222;
+            kamehamehaxposright[0] = 25;
+            kamehamehaxposright[1] = 92;
+            kamehamehaxposright[2] = 161;
+            kamehamehaxposright[3] = 222;
+            kamehamehaxposleft[0] = 1340;
+            kamehamehaxposleft[1] = 1273;
+            kamehamehaxposleft[2] = 1204;
+            kamehamehaxposleft[3] = 1086;
             
         }
 
@@ -200,14 +206,25 @@ namespace Ebay.Objects
             {
                 kamehameha = true;
                 Spriterect.Width = 55;
+                energyballactive = false;
+                hasreset = false;
                 
             }
 
-            else if (!keyboardState.IsKeyDown(Keys.Space))
+            else if (keyboardState.IsKeyUp(Keys.Space))
             {
+                if (hasreset == false)
+                    if (leftorright == 0)
+                    {
+                        {
+                            position.X = position.X + 50;
+                            hasreset = true;
+                        }
+                    }
                 framecounter = 0;
                 kamehameha = false;
                 counterto15 = 0;
+                energyballactive = false;
             }
 
 
@@ -232,6 +249,8 @@ namespace Ebay.Objects
                 position.Y = 0;
             else if (position.Y > Program.SCREEN_HEIGHT - Spriterect.Height)
                 position.Y = Program.SCREEN_HEIGHT - Spriterect.Height;
+
+            ACCELERATION = 1;
 
         }
 
@@ -284,37 +303,95 @@ namespace Ebay.Objects
 
         public void Kamehameha(){
             if(kamehameha == true){
-
-                counterto15++;
-
-                if (counterto15 > 15)
-                { 
-                    counterto15 = 0;
-                }
-
-
-                if (counterto15 == 15)
+                if (leftorright == 1)
                 {
-                    framecounter++;
+                    counterto15++;
+
+                    if (counterto15 > 15)
+                    {
+                        counterto15 = 0;
+                    }
+
+
+                    if (counterto15 == 15)
+                    {
+                        framecounter++;
+                    }
+                    if (framecounter <= 3) // Makes sure kamehamehaxposright dosent overflow
+                    {
+                        Spriterect.X = kamehamehaxposright[framecounter];
+                        Spriterect.Width = 55;
+
+                    }
+                    else if (framecounter > 3)
+                    {
+                        Spriterect.X = kamehamehaxposright[3];
+                        Spriterect.Width = 113;
+                        energyballactive = false;
+
+                    }
+                    if (framecounter > 2)
+                    {
+                        Spriterect.Width = 113;
+                        energyballactive = false;
+                        xVelocity = 0;
+                        yVelocity = 0;
+                        ACCELERATION = 0;
+                    }
+                    if ((framecounter == 3) && (counterto15 == 0)) // the instant he fires
+                    {
+                        energyballactive = true;
+                    }
+                    Spriterect.Y = 510;
+                    Spriterect.Height = 75;
                 }
-                if (framecounter <= 3) // Makes sure kamehamehaxpos dosent overflow
+                
+                else if (leftorright == 0)  
                 {
-                    Spriterect.X = kamehamehaxpos[framecounter];
-                    Spriterect.Width = 55;
+                    counterto15++;
+
+                    if (counterto15 > 15)
+                    {
+                        counterto15 = 0;
+                    }
+
+
+                    if (counterto15 == 15)
+                    {
+                        framecounter++;
+                    }
+                    if (framecounter <= 3) // Makes sure kamehamehaxposright dosent overflow
+                    {
+                        Spriterect.X = kamehamehaxposleft[framecounter];
+                        Spriterect.Width = 55;
+
+                    }
+                    else if (framecounter > 3)
+                    {
+                        Spriterect.X = kamehamehaxposleft[3];
+                        Spriterect.Width = 113;
+                        energyballactive = false;
+
+
+                    }
+                    if (framecounter > 2)
+                    {
+                        Spriterect.Width = 113;
+                        energyballactive = false;
+                        xVelocity = 0;
+                        yVelocity = 0;
+                        ACCELERATION = 0;
+
+                    }
+                    if ((framecounter == 3) && (counterto15 == 15)) // the instant he fires
+                    {
+                        position.X = position.X - 50;
+                        energyballactive = true;
+                    }
+                    Spriterect.Y = 510;
+                    Spriterect.Height = 75;
                 }
-                else if (framecounter > 3)
-                {
-                    Spriterect.X = kamehamehaxpos[3];
-                    Spriterect.Width = 113;
-                }
-                if (framecounter > 2)
-                {
-                    Spriterect.Width = 113;
-                }
-                Spriterect.Y = 510;
-                Spriterect.Height = 75;  
             }
         }
-
     }
 }

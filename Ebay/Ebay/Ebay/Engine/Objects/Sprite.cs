@@ -27,8 +27,8 @@ namespace Ebay.Engine.Objects
         //************************
         public int width;
         public int height;
-        protected Texture2D texture;
-        protected Vector2 position = Vector2.Zero;
+        public Texture2D texture;
+        public Vector2 position = Vector2.Zero;
         protected Rectangle Spriterect = new Rectangle(0,0,50,50); // This is the rectangle for spritesheets mark, jeez, default size is 50
         protected Color colour = Color.White;
         protected float rotation = 0f;
@@ -36,6 +36,7 @@ namespace Ebay.Engine.Objects
         protected float scale;
         protected SpriteEffects effects = SpriteEffects.None;
         protected float layerDepth;
+        public SpriteBatch usefulspritebatch;
 
         //************************
         // INITIALISER

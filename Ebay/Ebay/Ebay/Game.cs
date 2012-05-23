@@ -29,6 +29,7 @@ namespace Ebay
         public static SpriteBatch spriteBatch;
         Player wizard = new Player();
         Goku goku = new Goku();
+        Energyball energyball = new Energyball();
 
         public Game()
         {
@@ -60,6 +61,10 @@ namespace Ebay
             spriteBatch = new SpriteBatch(GraphicsDevice);
             wizard.Initialise(Content);
             goku.Initialise(Content);
+            energyball.Initialise(Content);
+
+            
+
         }
 
         /// <summary>
@@ -83,6 +88,8 @@ namespace Ebay
 
             wizard.Update();
             goku.Update();
+            energyball.Update();
+            
 
             base.Update(gameTime);
         }
@@ -99,6 +106,11 @@ namespace Ebay
             spriteBatch.Begin();
             wizard.Draw(spriteBatch);
             goku.Draw(spriteBatch);
+            if (goku.energyballactive == true)
+            {
+                energyball.setvalues(goku.position.X, goku.position.Y, goku.leftorright);
+            }
+            energyball.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
