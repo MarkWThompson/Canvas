@@ -38,6 +38,8 @@ namespace Ebay.Objects
         {
             texture = content.Load<Texture2D>("Sprites/SquareGuy");
             InitialiseSprite(texture);
+            Spriterect.Width = 91; //why the hell is this square 91x91??
+            Spriterect.Height = 91;
         }
 
         //************************

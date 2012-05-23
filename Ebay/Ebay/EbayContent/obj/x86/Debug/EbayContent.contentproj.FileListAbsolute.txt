@@ -1,1 +1,2 @@
 C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\EbayContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Coding\Canvas\Ebay\Ebay\EbayContent\obj\x86\Debug\ResolveAssemblyReference.cache

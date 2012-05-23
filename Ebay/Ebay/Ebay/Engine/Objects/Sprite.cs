@@ -29,7 +29,7 @@ namespace Ebay.Engine.Objects
         public int height;
         protected Texture2D texture;
         protected Vector2 position = Vector2.Zero;
-        protected Rectangle? sourceRect = null; // What does this mean!?
+        protected Rectangle Spriterect = new Rectangle(0,0,50,50); // This is the rectangle for spritesheets mark, jeez, default size is 50
         protected Color colour = Color.White;
         protected float rotation = 0f;
         protected Vector2 origin = Vector2.Zero;
@@ -60,7 +60,7 @@ namespace Ebay.Engine.Objects
             if (texture == null)
                 return;
 
-            spriteBatch.Draw(texture, position, sourceRect, colour, rotation, origin, scale, effects, layerDepth);
+            spriteBatch.Draw(texture, position, Spriterect, colour, rotation, origin, scale, effects, layerDepth);
         }
     }
 }

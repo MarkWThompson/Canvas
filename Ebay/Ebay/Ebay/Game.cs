@@ -28,6 +28,7 @@ namespace Ebay
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
         Player wizard = new Player();
+        Goku goku = new Goku();
 
         public Game()
         {
@@ -58,6 +59,7 @@ namespace Ebay
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             wizard.Initialise(Content);
+            goku.Initialise(Content);
         }
 
         /// <summary>
@@ -80,6 +82,7 @@ namespace Ebay
                 this.Exit();
 
             wizard.Update();
+            goku.Update();
 
             base.Update(gameTime);
         }
@@ -95,6 +98,7 @@ namespace Ebay
 
             spriteBatch.Begin();
             wizard.Draw(spriteBatch);
+            goku.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
