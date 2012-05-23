@@ -209,7 +209,6 @@ namespace Ebay.Objects
                 kamehameha = true;
                 Spriterect.Width = 55;
                 energyballactive = false;
-                hasreset = false;
                 
             }
 
@@ -389,6 +388,7 @@ namespace Ebay.Objects
                     {
                         position.X = position.X - 50;
                         energyballactive = true;
+                        hasreset = false;
                     }
                     Spriterect.Y = 510;
                     Spriterect.Height = 75;
