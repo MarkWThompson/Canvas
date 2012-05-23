@@ -70,27 +70,29 @@ namespace Ebay.Objects
 
         private void HandleInput()
         {
+           
             // Standard WASD movement.
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 if (yVelocity > -MAX_Y_VELOCITY)
                 {
                     yVelocity -= ACCELERATION;
-                    if (leftorright == 1)
-                    {
-                        Spriterect.X = 315;
-                        Spriterect.Y = 245;
-                        Spriterect.Width = 55;
-                        Spriterect.Height = 75;
-                    }
-                    else if (leftorright == 0)
-                    {
-                        Spriterect.X = 1060;
-                        Spriterect.Y = 245;
-                        Spriterect.Width = 55;
-                        Spriterect.Height = 75;
-                    }
                 }
+                if (leftorright == 1)
+                {
+                    Spriterect.X = 315;
+                    Spriterect.Y = 245;
+                    Spriterect.Width = 55;
+                    Spriterect.Height = 75;
+                }
+                else if (leftorright == 0)
+                {
+                    Spriterect.X = 1060;
+                    Spriterect.Y = 245;
+                    Spriterect.Width = 55;
+                    Spriterect.Height = 75;
+                }
+                
             }
             if (keyboardState.IsKeyDown(Keys.Down))
             {
