@@ -13,3 +13,4 @@ C:\Coding\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Content\Sprites\SquareGuy.xnb
 C:\Coding\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Ebay.exe
 C:\Coding\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Ebay.pdb
 C:\Coding\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Content\Sprites\Goku.xnb
+C:\Users\Mark\Documents\GitHub\Canvas\Ebay\Ebay\Ebay\bin\x86\Debug\Content\Sprites\Goku.xnb

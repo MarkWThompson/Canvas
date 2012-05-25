@@ -2,7 +2,7 @@
 //
 // Authors: Elliot Morris, Mark Thompson.
 //
-// Details: Base class for all game sprites.
+// Details: Base class for all sprites.
 //
 */
 
@@ -20,35 +20,29 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Ebay.Engine.Objects
 {
-    public class Sprite
+    public class Sprite : Object
     {
         //************************
         // PROPERTIES
         //************************
-        public int width;
-        public int height;
         public Texture2D texture;
-        public Vector2 position = Vector2.Zero;
-        protected Rectangle Spriterect = new Rectangle(0,0,50,50); // This is the rectangle for spritesheets mark, jeez, default size is 50
+        protected Rectangle sourceRect = new Rectangle();
         protected Color colour = Color.White;
-        protected float rotation = 0f;
         protected Vector2 origin = Vector2.Zero;
-        protected float scale;
         protected SpriteEffects effects = SpriteEffects.None;
         protected float layerDepth;
-        public SpriteBatch usefulspritebatch;
 
         //************************
         // INITIALISER
         //************************
-        protected void InitialiseSprite(Texture2D texture, float x = 0, float y = 0, float scale = 1f, float layerDepth = 0)
+        protected void InitialiseSprite(Texture2D texture, float x = 0, float y = 0, float layerDepth = 0)
         {
             this.texture = texture;
-            this.width = texture.Bounds.Width;
-            this.height = texture.Bounds.Height;
+            this.sourceRect = new Rectangle(0, 0, texture.Bounds.Width, texture.Bounds.Height);
+            this.width = this.sourceRect.Width;
+            this.height = this.sourceRect.Height;
             this.position.X = x;
             this.position.Y = y;
-            this.scale = scale;
             this.layerDepth = layerDepth;
         }
 
@@ -58,10 +52,20 @@ namespace Ebay.Engine.Objects
         // Draws the sprite to a specified SpriteBatch.
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (texture == null)
-                return;
+            // Does not draw if no texture loaded or invisible.
+            if ((texture != null) && (visible))
+                spriteBatch.Draw(texture, position, sourceRect, colour, rotation, origin, scale, effects, layerDepth);
+        }
 
-            spriteBatch.Draw(texture, position, Spriterect, colour, rotation, origin, scale, effects, layerDepth);
+        // Updates sprite dimensions based on the sourceRect - for use with spritesheets.
+        public void ChangeSpriteRect(int x, int y, int width, int height)
+        {
+            sourceRect.X = x;
+            sourceRect.Y = y;
+            sourceRect.Width = width;
+            sourceRect.Height = height;
+            this.width = width;
+            this.height = height;
         }
     }
 }

@@ -27,9 +27,7 @@ namespace Ebay
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
-        Player wizard = new Player();
         Goku goku = new Goku();
-        Energyball energyball = new Energyball();
 
         public Game()
         {
@@ -59,12 +57,7 @@ namespace Ebay
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            wizard.Initialise(Content);
             goku.Initialise(Content);
-            energyball.Initialise(Content);
-
-            
-
         }
 
         /// <summary>
@@ -86,10 +79,7 @@ namespace Ebay
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            wizard.Update();
-            goku.Update();
-            energyball.Update();
-            
+            goku.Update();           
 
             base.Update(gameTime);
         }
@@ -101,16 +91,10 @@ namespace Ebay
         /// 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DodgerBlue); // DodgerBlue is the new Brown which was the new Aquamarine which was the new Black overriding the original Green/Yellow coulour...
+            GraphicsDevice.Clear(Color.DodgerBlue);
 
             spriteBatch.Begin();
-            wizard.Draw(spriteBatch);
             goku.Draw(spriteBatch);
-            if (goku.energyballactive == true)
-            {
-                energyball.setvalues(goku.position.X, goku.position.Y, goku.leftorright);
-            }
-            energyball.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
