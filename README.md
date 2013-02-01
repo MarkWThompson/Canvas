@@ -1,3 +1,3 @@
 Canvas
 ======
-First application created with XNA 4.0.
+Created to get a basic grounding with C# and the XNA 4.0 framework.
